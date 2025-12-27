@@ -41,3 +41,16 @@
   keywords: ("React", "Node.js", "PostgreSQL")
 )
 
+#section("Projects")
+#project(
+  title: "GreenBoard",
+  projectLink: "https://greenboard.tn",
+  repoLink: "https://github.com/bouajilaProg/greenboard",
+  tools: "React, PostgreSQL, Drizzle ORM, HTML, Tailwind CSS, Git, Vercel, Resend",
+  description: [
+    - Developed a full-stack web platform for GreenBoard venture.
+    - Implemented a client-facing system for requesting custom PCB hardware.
+    - Deployed the platform on Vercel and integrated transactional email workflows.
+  ]
+)
+

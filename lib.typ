@@ -78,3 +78,35 @@
   )
 }
 
+#let project(title: "", description: [], tools: "", projectLink: none, repoLink: none) = {
+  v(4pt)
+  let displayLink = if projectLink != none {
+    projectLink.replace("https://", "").replace("http://", "")
+  } else if repoLink != none {
+    repoLink.split("/").slice(-2).join("/") 
+  } else { none }
+  
+  let target = if projectLink != none { projectLink } else { repoLink }
+
+  grid(
+    columns: (1fr, auto),
+    [
+      *#title*
+      #v(-4pt)
+      #text(size: 9pt, fill: rgb("#444444"))[
+        #set list(indent: 6pt, marker: [•], spacing: 4pt)
+        #description
+      ]
+      #v(-4pt)
+      #text(size: 9pt)[
+        Tools & Technologies: #text(fill: rgb("#555555"))[#tools]
+      ]
+    ],
+    align(right)[
+      #if target != none {
+        text(size: 8pt, fill: primary-color)[#link(target)[#displayLink]]
+      }
+    ]
+  )
+}
+
