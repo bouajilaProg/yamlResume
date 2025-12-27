@@ -110,3 +110,12 @@
   )
 }
 
+// New Skills function
+#let skill_item(category: "", items: ()) = {
+  v(2pt)
+  grid(
+    columns: (80pt, 1fr),
+    text(weight: 600, size: 9pt)[#category:],
+    text(size: 9pt, fill: rgb("#444444"))[#items.join(", ")]
+  )
+}
