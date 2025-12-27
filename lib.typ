@@ -55,3 +55,26 @@
   )
 }
 
+// Updated Experience: Role is now normal text
+#let experience(company: "", role: "", location: "", startDate: "", endDate: none, summary: "", keywords: ()) = {
+  v(4pt)
+  grid(
+    columns: (1fr, auto),
+    gutter: 10pt,
+    [
+      *#company* #h(5pt) #text(fill: rgb("#555555"))[#role] \
+      #v(-2pt)
+      #text(size: 9pt, fill: rgb("#444444"))[#summary]
+      #if keywords.len() > 0 {
+        v(-2pt)
+        text(size: 8pt, fill: primary-color.lighten(20%), weight: 500)[Technologies: #keywords.join(", ")]
+      }
+    ],
+    align(right)[
+      #text(size: 9pt, weight: 500)[#location] \
+      #v(-2pt)
+      #text(size: 8pt, fill: rgb("#666666"))[#startDate – #(if endDate == none or endDate == "" { "Present" } else { endDate })]
+    ]
+  )
+}
+

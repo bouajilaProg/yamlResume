@@ -30,3 +30,14 @@
   keywords: ("Algorithms", "Data Structures", "C/C++", "Java", "SQL")
 )
 
+#section("Experience")
+#experience(
+  company: "Tech Solutions",
+  role: "Fullstack Intern",
+  location: "Tunis, Tunisia",
+  startDate: "June 2024",
+  endDate: none,
+  summary: "Developed a real-time dashboard using React and Node.js.",
+  keywords: ("React", "Node.js", "PostgreSQL")
+)
+
