@@ -75,3 +75,39 @@
   category: "Languages",
   items: ("english(upper-intermediate)","french(intermediate)","arabic(native)")
 )
+
+
+
+#section("Certifications")
+
+#certification(
+  "Foundations of Project Management",
+  "Google",
+  "Sept 2025"
+)
+
+#certification(
+  "Intro to Git and GitHub",
+  "Google",
+  "Aug 2024"
+)
+
+#certification(
+  "Operating Systems and You Becoming a Power User",
+  "Google",
+  "Aug 2024"
+)
+
+#certification(
+  "The Bits and Bytes of Computer Networking",
+  "Google",
+  "Aug 2024"
+)
+
+#certification(
+  "Technical Support Fundamentals",
+  "Google",
+  "Aug 2024"
+)
+
+

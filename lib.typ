@@ -110,7 +110,6 @@
   )
 }
 
-// New Skills function
 #let skill_item(category: "", items: ()) = {
   v(2pt)
   grid(
@@ -119,3 +118,15 @@
     text(size: 9pt, fill: rgb("#444444"))[#items.join(", ")]
   )
 }
+
+#let certification(name, issuing, date) = {
+  table(
+    columns: (1fr, auto),
+    inset: (y: 2pt, x: 0pt),
+    stroke: none,         
+    align: (left, right),
+    [*#issuing*: #name], 
+    [#date]
+  )
+}
+
