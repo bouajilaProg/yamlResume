@@ -111,3 +111,6 @@
 )
 
 
+#section("Hobbies")
+#hobbies(items: ("Photography", "Hiking", "Cooking", "Chess"))
+
