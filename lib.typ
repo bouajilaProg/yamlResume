@@ -35,7 +35,7 @@
     columns: (auto, 1fr),
     align: horizon,
     gutter: 8pt,
-    text(fill: primary-color, weight: 700, size: size-section-title, upper(title)),
+    text(fill: primary-color, weight: 700, size: size-section-title, upper(title.at(0)) + title.slice(1)) ,
     line(length: 100%, stroke: 0.5pt + primary-color.lighten(30%))
   )
   v(-2pt)
