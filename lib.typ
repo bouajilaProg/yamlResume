@@ -4,7 +4,7 @@
 // --- Page Setup ---
 #set page(
   margin: page-margins,
-  paper: "us-letter", // or "a4"
+  paper: "us-letter", 
 )
 #set text(font: font-body, size: size-body, fill: text-dark)
 
@@ -42,81 +42,89 @@
 }
 
 #let profile(content) = {
-  set par(justify: true)
-  text(size: size-body, fill: text-dark)[#content]
+  pad(left: 8pt)[
+    #set par(justify: true)
+    #text(size: size-body, fill: text-dark)[#content]
+  ]
 }
 
 #let education(degreeType: "", degreeName: "", institution: "", startDate: "", endDate: "", keywords: ()) = {
   v(2pt)
-  grid(
-    columns: (1fr, auto),
-    [
-      *#degreeType* #institution \
-      #text(size: size-body, fill: text-medium)[#degreeName]
-      #if keywords.len() > 0 {
-        v(-2pt)
-        text(size: size-tiny, fill: primary-color.lighten(20%), weight: 500)[Key Skills: #keywords.join(", ")]
-      }
-    ],
-    [#text(size: size-body, fill: text-medium)[#startDate – #endDate]]
-  )
+  pad(left: 8pt)[
+    #grid(
+      columns: (1fr, auto),
+      [
+        *#degreeType* #institution \
+        #text(size: size-body, fill: text-medium)[#degreeName]
+        #if keywords.len() > 0 {
+          v(-2pt)
+          text(size: size-tiny, fill: primary-color.lighten(20%), weight: 500)[Key Skills: #keywords.join(", ")]
+        }
+      ],
+      [#text(size: size-body, fill: text-medium)[#startDate – #endDate]]
+    )
+  ]
 }
 
 #let experience(company: "", role: "", location: "", startDate: "", endDate: none, summary: "", keywords: ()) = {
   v(item-spacing)
-  grid(
-    columns: (1fr, auto),
-    gutter: 10pt,
-    [
-      *#company* #h(5pt) #text(fill: text-medium)[#role] \
-      #v(-2pt)
-      #text(size: size-body, fill: text-dark)[#summary]
-      #if keywords.len() > 0 {
-        v(-2pt)
-        text(size: size-tiny, fill: primary-color.lighten(20%), weight: 500)[Technologies: #keywords.join(", ")]
-      }
-    ],
-    align(right)[
-      #text(size: size-body, weight: 500)[#location] \
-      #v(-2pt)
-      #text(size: size-tiny, fill: text-light)[#startDate – #(if endDate == none or endDate == "" { "Present" } else { endDate })]
-    ]
-  )
+  pad(left: 8pt)[
+    #grid(
+      columns: (1fr, auto),
+      gutter: 10pt,
+      [
+        *#company* #h(5pt) #text(fill: text-medium)[#role] \
+        #v(-2pt)
+        #text(size: size-body, fill: text-dark)[#summary]
+        #if keywords.len() > 0 {
+          v(-2pt)
+          text(size: size-tiny, fill: primary-color.lighten(20%), weight: 500)[Technologies: #keywords.join(", ")]
+        }
+      ],
+      align(right)[
+        #text(size: size-body, weight: 500)[#location] \
+        #v(-2pt)
+        #text(size: size-tiny, fill: text-light)[#startDate – #(if endDate == none or endDate == "" { "Present" } else { endDate })]
+      ]
+    )
+  ]
 }
 
 #let project(title: "", description: [], tools: "", projectLink: none, repoLink: none) = {
   v(item-spacing)
-  let displayLink = if projectLink != none {
-    projectLink.replace("https://", "").replace("http://", "")
-  } else if repoLink != none {
-    repoLink.split("/").slice(-2).join("/") 
-  } else { none }
-  
-  let target = if projectLink != none { projectLink } else { repoLink }
+  pad(left: 8pt)[
+    #let displayLink = if projectLink != none {
+      projectLink.replace("https://", "").replace("http://", "")
+    } else if repoLink != none {
+      repoLink.split("/").slice(-2).join("/") 
+    } else { none }
+    
+    #let target = if projectLink != none { projectLink } else { repoLink }
 
-  grid(
-    columns: (1fr, auto),
-    [
-      *#title*
-      #v(-4pt)
-      #text(size: size-body, fill: text-dark)[
-        #set list(indent: 6pt, marker: [•], spacing: 4pt)
-        #description
+    #grid(
+      columns: (1fr, auto),
+      [
+        *#title*
+        #v(-4pt)
+        #text(size: size-body, fill: text-dark)[
+          #set list(indent: 6pt, marker: [•], spacing: 4pt)
+          #description
+        ]
+        #v(-4pt)
+        #text(size: size-body)[
+          Tools & Technologies: #text(fill: text-medium)[#tools]
+        ]
+      ],
+      align(right)[
+        #if target != none {
+          text(size: size-tiny, fill: primary-color)[#link(target)[#displayLink]]
+        }
       ]
-      #v(-4pt)
-      #text(size: size-body)[
-        Tools & Technologies: #text(fill: text-medium)[#tools]
-      ]
-    ],
-    align(right)[
-      #if target != none {
-        text(size: size-tiny, fill: primary-color)[#link(target)[#displayLink]]
-      }
-    ]
-  )
+    )
+  ]
 }
 
-// skills
+// --- Skills Grouping ---
 #let skill_item(category: "", items: ()) = {
   grid(
     columns: (80pt, 1fr),
@@ -126,14 +134,12 @@
 }
 
 #let skills_group(..items) = {
-  stack(
-    dir: ttb,
-    spacing: 4pt,
-    ..items
-  )
+  pad(left: 8pt)[
+    #stack(dir: ttb, spacing: 4pt, ..items)
+  ]
 }
 
-// certif
+// --- Certification Grouping ---
 #let cert_item(name, issuing, date) = {
   grid(
     columns: (1fr, auto),
@@ -144,35 +150,35 @@
 }
 
 #let certifications_group(..items) = {
-  stack(
-    dir: ttb,
-    spacing: 4pt,
-    ..items
-  )
+  pad(left: 8pt)[
+    #stack(dir: ttb, spacing: 4pt, ..items)
+  ]
 }
-
 
 #let hobbies(items: ()) = {
   v(2pt)
-  text(items.join(", "), size: size-body)
+  pad(left: 8pt)[
+    #text(items.join(", "), size: size-body)
+  ]
 }
 
-#let Extracurr(title: "", description: [], startDate: none,endDate:none ) = {
+#let Extracurr(title: "", description: [], startDate: none, endDate: none) = {
   v(item-spacing)
-  grid(
-    columns: (1fr, auto),
-    [
-      *#title*
-      #v(-4pt)
-      #text(size: size-body, fill: text-dark)[
-        #set list(indent: 6pt, marker: [•], spacing: 4pt)
-        #description
+  pad(left: 8pt)[
+    #grid(
+      columns: (1fr, auto),
+      [
+        *#title*
+        #v(-4pt)
+        #text(size: size-body, fill: text-dark)[
+          #set list(indent: 6pt, marker: [•], spacing: 4pt)
+          #description
+        ]
+        #v(-4pt)
+      ],
+      align(right)[
+        #text(size: size-tiny, fill: text-dark)[#startDate – #(if endDate == none or endDate == "" { "Present" } else { endDate })]
       ]
-      #v(-4pt)
-    ],
-    align(right)[
-          #text(size: size-tiny, fill: text-dark)[#startDate – #(if endDate == none or endDate == "" { "Present" } else { endDate })]
-]
-  )
+    )
+  ]
 }
-
