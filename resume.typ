@@ -72,35 +72,14 @@
     items: ("English (Upper-Intermediate)", "French (Intermediate)", "Arabic (Native)")
   )
 )
-
-
-
 #section("Certifications")
 
-#certification(
-  "Foundations of Project Management",
-  "Google",
-  "Sept 2025"
+#certifications_group(
+  cert_item("Foundations of Project Management", "Google", "Sept 2025"),
+  cert_item("Operating Systems and You Becoming a Power User", "Google", "Aug 2024"),
+  cert_item("The Bits and Bytes of Computer Networking", "Google", "Aug 2024"),
+  cert_item("Technical Support Fundamentals", "Google", "Aug 2024"),
 )
-
-#certification(
-  "Operating Systems and You Becoming a Power User",
-  "Google",
-  "Aug 2024"
-)
-
-#certification(
-  "The Bits and Bytes of Computer Networking",
-  "Google",
-  "Aug 2024"
-)
-
-#certification(
-  "Technical Support Fundamentals",
-  "Google",
-  "Aug 2024"
-)
-
 #section("Extracurricular")
 #Extracurr(title: "Chairman of the Code Bey Isimm",
 description: [

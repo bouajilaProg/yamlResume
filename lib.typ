@@ -125,7 +125,6 @@
   )
 }
 
-#let certification(name, issuing, date) = {
 #let skills_group(..items) = {
   stack(
     dir: ttb,
@@ -134,14 +133,24 @@
   )
 }
 
+// certif
+#let cert_item(name, issuing, date) = {
+  grid(
     columns: (1fr, auto),
-    inset: (y: 2pt, x: 0pt),
-    stroke: none,          
     align: (left, right),
-    [*#issuing*: #name], 
+    [*#issuing*: #name],
     [#date]
   )
 }
+
+#let certifications_group(..items) = {
+  stack(
+    dir: ttb,
+    spacing: 4pt,
+    ..items
+  )
+}
+
 
 #let hobbies(items: ()) = {
   v(2pt)
