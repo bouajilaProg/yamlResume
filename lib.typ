@@ -106,17 +106,30 @@
     #text(size: size-body, fill: text-dark)[#content]
   ]
 }
-
-// --- 5. One Liners ---
 #let one_liners(items) = {
   pad(left: 8pt)[
-    #stack(dir: ttb, spacing: 6pt, ..items.map(it => {
-      if type(it) == dictionary {
-        grid(columns: (1fr, auto), [• #it.text], [#it.date])
-      } else {
-        [• #it]
-      }
-    }))
+    #stack(
+      dir: ttb, 
+      spacing: 6pt, 
+      ..items.map(it => {
+        if type(it) == "dictionary" or type(it) == dictionary {
+          grid(
+            columns: (1fr, auto),
+            align: (bottom + left, bottom + right),
+            // eval converts the string into bold/markup
+            [• #eval(it.text, mode: "markup")], 
+            [#it.date]
+          )
+        } else {
+          [• #it]
+        }
+      })
+    )
   ]
 }
 
+#one_liners((
+  (text: "*Google:* Foundations of Project Management", date: "Sept 2025"),
+  (text: "*Google:* Operating Systems and You: Power User", date: "Aug 2024"),
+  (text: "*Google:* The Bits and Bytes of Computer Networking", date: "Aug 2024"),
+))

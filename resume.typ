@@ -65,10 +65,9 @@
 
 #section("Certifications")
 #one_liners((
-  (text: "Foundations of Project Management (Google)", date: "Sept 2025"),
-  (text: "Operating Systems and You Becoming a Power User (Google)", date: "Aug 2024"),
-  (text: "The Bits and Bytes of Computer Networking (Google)", date: "Aug 2024"),
-  (text: "Technical Support Fundamentals (Google)", date: "Aug 2024"),
+  (text: "*Google:* Foundations of Project Management", date: "Sept 2025"),
+  (text: "*Google:* Operating Systems and You: Power User", date: "Aug 2024"),
+  (text: "*Google:* The Bits and Bytes of Computer Networking", date: "Aug 2024"),
 ))
 
 #section("Extracurricular")
