@@ -1,2 +1,9 @@
 # Ignore build output directory
 build/
+dist/
+resume.pdf
+
+# node_modules directory
+node_modules/
+
+
