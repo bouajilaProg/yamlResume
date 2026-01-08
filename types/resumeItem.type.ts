@@ -12,11 +12,11 @@ export interface Resume {
   template: string;
   lastUpdate: string;
 
-  personalInfo: PersonalInfo;
-  educations: EducationItem[];
-  projects: Project[];
-  experiences: WorkExperience[];
-  skills: Skills;
+  personalInfo?: PersonalInfo;
+  educations?: EducationItem[];
+  projects?: Project[];
+  experiences?: WorkExperience[];
+  skills?: Skills;
 
   certifications?: Certification[];
   extracurriculars?: ExtraCurricularActivity[];
