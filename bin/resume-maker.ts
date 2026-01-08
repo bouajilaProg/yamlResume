@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { compileCommand } from "../src/programs/compile.js";
+import { compileCommand } from "../src/programs/compileCommand.js";
+
 const program = new Command();
 
 program
@@ -10,10 +11,11 @@ program
   .version("0.1.0");
 
 program
-  .command("compile")
-  .description("Compile build/resume.typ to PDF")
-  .action(() => {
-    compileCommand();
+  .command("compile [inputFile]")
+  .description("Compile a Typst file to PDF")
+  .action((inputFile) => {
+    compileCommand(inputFile);
   });
 
 program.parse();
+
