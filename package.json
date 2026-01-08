@@ -8,7 +8,8 @@
     "dev": "tsx bin/resume-maker.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsx bin/resume-maker.ts compile resume.yaml"
   },
   "keywords": [],
   "author": "bouajila",
@@ -20,11 +21,10 @@
     "commander": "^14.0.2",
     "execa": "^9.6.1",
     "ora": "^9.0.0",
-    "prompts": "^2.4.2",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "@typst-community/typst-linux-x64": "0.10.0-8",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
