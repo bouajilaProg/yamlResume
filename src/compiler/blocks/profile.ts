@@ -1,4 +1,4 @@
-export function profile(userSummary: string): string {
+export function Profile(userSummary: string): string {
   return (`
   #section("profile")
   ${userSummary}

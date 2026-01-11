@@ -1,4 +1,4 @@
-export function base() {
+export function Base() {
   return `
 
 #import "../template/standard/lib.typ": *
