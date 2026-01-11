@@ -9,7 +9,8 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
-    "test": "tsx ./src/compiler/test/compileTestBlock.test.ts"
+    "test-compile": "tsx ./src/compiler/test/compileTestBlock.test.ts",
+    "e2etest-compile": "nodemon --watch src --ext ts --ignore node_modules --ignore dist --exec src/compiler/test/compile.e2e.sh"
   },
   "keywords": [],
   "author": "bouajila",
