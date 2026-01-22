@@ -1,5 +1,5 @@
 import { Certification } from "./certif.type";
-import { EducationItem } from "./education.type";
+import { EducationItem } from "./education.type"
 import { WorkExperience } from "./experience.type";
 import { ExtraCurricularActivity } from "./extraCurr.type";
 import { PersonalInfo } from "./personalInfo.type";

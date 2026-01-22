@@ -31,6 +31,7 @@ const mockResume: Resume = {
       institution: "ISIMM",
       startDate: "2021",
       endDate: "2024",
+      keySkills: "Algorithms, Data Structures, Software Engineering",
     },
   ],
 

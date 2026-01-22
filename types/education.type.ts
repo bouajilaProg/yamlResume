@@ -11,10 +11,13 @@ interface EducationItem {
   id: number;
   degreeType: DegreeType;
   degreeName: string;
+  description: string;
   institution: string;
   startDate: string;
   endDate: string;
   keySkills: string;
 }
+
+export type { EducationItem };
 
 
