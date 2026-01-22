@@ -22,6 +22,7 @@ export class ResumeBuilder {
 
   addProfile(userSummary?: string) {
     if (this.skipIfNull(userSummary)) return this;
+    this.parts.push(blocks.sectionTitle("Profile"));
     this.parts.push(blocks.Profile(userSummary!));
     return this;
   }
