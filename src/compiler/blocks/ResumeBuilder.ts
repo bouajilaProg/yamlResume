@@ -2,6 +2,7 @@ import { Contact } from "../../../types/personalInfo.type";
 import { WorkExperience } from "../../../types/experience.type";
 import { EducationItem } from "../../../types/education.type";
 import { Project } from "../../../types/project.type";
+import { Skills } from "../../../types/skills.type";
 import * as blocks from "../blocks/";
 
 export class ResumeBuilder {
@@ -58,6 +59,14 @@ export class ResumeBuilder {
     projects!.forEach(proj => {
       this.parts.push(blocks.ProjectBlock(proj));
     });
+    return this;
+  }
+
+  addSkills(skills?: Skills) {
+    if (this.skipIfNull(skills)) return this;
+
+    this.parts.push(blocks.sectionTitle("Skills"));
+    this.parts.push(blocks.SkillsBlock(skills!));
     return this;
   }
   build(): string {
