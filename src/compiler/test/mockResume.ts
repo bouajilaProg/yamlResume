@@ -56,8 +56,7 @@ const mockResume: Resume = {
       description:
         "A web application for small businesses to manage invoices, products, and stock with a simple UI.",
       tools: "React, NestJS, PostgreSQL, Docker",
-      projectLink: "",
-      repoLink: "",
+      projectLink: "da ",
     },
     {
       id: 2,
@@ -66,7 +65,6 @@ const mockResume: Resume = {
         "A plug-and-play project template to avoid repetitive setup and speed up new client projects.",
       tools: "Next.js, NestJS, pnpm",
       projectLink: "",
-      repoLink: "",
     },
   ],
 

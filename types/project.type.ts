@@ -6,7 +6,6 @@ interface Project {
   tools: string,
 
   projectLink?: string,
-  repoLink?: string,
 }
 
 export type { Project };
