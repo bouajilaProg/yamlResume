@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PDF_FILE="output/resume.pdf"
-TEST_COMMAND="pnpm run test-compile"
+TEST_COMMAND="pnpm run test:compile"
 
 OPEN_OKULAR=true
 OKULAR_PID_FILE="/tmp/okular_resume.pid"
