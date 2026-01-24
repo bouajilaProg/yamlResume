@@ -6,11 +6,13 @@ function SkillsBlock(skills: Skills): string {
   const technologies = skills.technologies.map(formatSkill).join(", ");
   const softSkills = skills.softSkills.map(formatSkill).join(", ");
 
-  return `#one_liner((
-  "Languages: " + "${languages}",
-  "Technologies: " + "${technologies}",
-  "Soft Skills: " + "${softSkills}"
-))`;
+  return `
+#one_liner((
+  [*Languages*: ${languages}],
+  [*Technologies*: ${technologies}],
+  [*Soft Skills*: ${softSkills}]
+))
+`;
 }
 
 export { SkillsBlock };

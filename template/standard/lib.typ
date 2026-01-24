@@ -96,6 +96,7 @@
   )
   v(2pt)
 }// --- 4. Paragraph Item ---
+// --- 4. Paragraph Item ---
 #let paragraph(content) = {
   pad(left: 8pt)[
     #set par(justify: true)
@@ -106,25 +107,20 @@
 
 // --- 5. One Liners Item ---
 #let one_liner(items) = {
-  pad(left: 8pt)[
-    #stack(
+    stack(
       dir: ttb, 
       spacing: 6pt, 
       ..items.map(it => {
-        if type(it) == "dictionary" or type(it) == dictionary {
+        if type(it) == dictionary {
           grid(
             columns: (1fr, auto),
             align: (bottom + left, bottom + right),
-            // eval converts the string into bold/markup
-            [• #eval(it.text, mode: "markup")], 
+            [#it.text],
             [#it.date]
           )
         } else {
-          [• #it]
+          [#it]
         }
       })
     )
-  ]
 }
-
-
