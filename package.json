@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit",
 
     "test:compile": "tsx ./src/compiler/test/compileTestBlock.test.ts",
-    "test:dev:compile": "nodemon --watch src --ext ts --ignore node_modules --ignore dist --exec src/compiler/test/compile.e2e.sh"
+    "test:dev:compile": "nodemon --watch src --watch template --ext ts,typ --ignore node_modules --ignore dist --exec src/compiler/test/compile.e2e.sh"
   },
   "keywords": [],
   "author": "bouajila",
