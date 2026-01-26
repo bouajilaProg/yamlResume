@@ -15,6 +15,8 @@ function testBlocks() {
     .addEducations(mockResume.educations)
     .addProjects(mockResume.projects)
     .addSkills(mockResume.skills)
+    .addLanguages(mockResume?.personalInfo?.languages)
+    .addHobbies(mockResume?.personalInfo?.hobbies)
     .addCertifications(mockResume.certifications)
     .addExtracurriculars(mockResume.extracurriculars);
 

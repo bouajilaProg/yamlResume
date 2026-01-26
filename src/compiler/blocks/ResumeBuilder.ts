@@ -79,6 +79,13 @@ export class ResumeBuilder {
     return this;
   }
 
+  addHobbies(hobbies?: string[]) {
+    if (this.skipIfNull(hobbies) || hobbies!.length === 0) return this;
+    this.parts.push(blocks.sectionTitle("Hobbies"));
+    this.parts.push(blocks.HobbiesBlock(hobbies!));
+    return this;
+  }
+
   addCertifications(certifications?: Certification[]) {
     if (this.skipIfNull(certifications) || certifications!.length === 0) return this;
 

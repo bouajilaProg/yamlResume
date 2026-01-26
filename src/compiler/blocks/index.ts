@@ -9,3 +9,4 @@ export * from "./certification";
 export * from "./extraCurr";
 export * from "./sectionTitle";
 export * from "./languages";
+export * from "./hobbies";
