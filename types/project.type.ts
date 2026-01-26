@@ -2,7 +2,7 @@
 interface Project {
   id: number;
   title: string;
-  description: string;
+  notes: string[];
   tools: string,
 
   projectLink?: string,

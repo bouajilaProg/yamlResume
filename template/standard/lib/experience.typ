@@ -23,11 +23,19 @@
     ])
   }
   
+  // Logic: Check if description exists, then decide between plain text or list
   if description != () and description != "" and description != none {
     let desc-items = if type(description) == str { (description,) } else { description }
-    left-items.push(
-      list(..desc-items, tight: true)
-    )
+    
+    if desc-items.len() == 1 {
+      // Single item: Render as standard text
+      left-items.push(desc-items.at(0))
+    } else {
+      // Multiple items: Render as a bulleted list
+      left-items.push(
+        list(..desc-items, tight: true)
+      )
+    }
   }
   
   if tags != () and tags != none and tags != "" {
