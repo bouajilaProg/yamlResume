@@ -72,6 +72,13 @@ export class ResumeBuilder {
     return this;
   }
 
+  addLanguages(languages?: string[]) {
+    if (this.skipIfNull(languages) || languages!.length === 0) return this;
+    this.parts.push(blocks.sectionTitle("Spoken Languages"));
+    this.parts.push(blocks.LanguagesBlock(languages!));
+    return this;
+  }
+
   addCertifications(certifications?: Certification[]) {
     if (this.skipIfNull(certifications) || certifications!.length === 0) return this;
 

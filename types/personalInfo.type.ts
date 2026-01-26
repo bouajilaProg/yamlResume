@@ -20,5 +20,6 @@ export interface PersonalInfo {
   description: string;
   contact: Contact[];
   hobbies: string[];
+  languages: string[];
 }
 

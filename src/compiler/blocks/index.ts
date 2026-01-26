@@ -8,3 +8,4 @@ export * from "./skills";
 export * from "./certification";
 export * from "./extraCurr";
 export * from "./sectionTitle";
+export * from "./languages";
