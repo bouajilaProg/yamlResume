@@ -1,6 +1,10 @@
+#import "../config.typ": *
+
 #let one_liner(items) = {
   v(-4pt)
-  stack(
+
+  pad(left: padding)[
+    #stack(
     dir: ttb, 
     spacing: 8pt, 
     ..items.map(it => {
@@ -16,5 +20,6 @@
       }
     })
   )
+]
   v(-4pt)
 }

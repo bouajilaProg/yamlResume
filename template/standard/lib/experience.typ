@@ -63,16 +63,18 @@
   if left-items.len() > 0 or right-items.len() > 0 {
     let max-rows = calc.max(left-items.len(), right-items.len())
     
-    grid(
-      columns: (1fr, auto),
-      row-gutter: 5pt,
-      ..for i in range(max-rows) {
-        (
-          if i < left-items.len() { left-items.at(i) } else { [] },
-          if i < right-items.len() { align(right)[#right-items.at(i)] } else { [] }
-        )
-      }
-    )
+  pad(left: padding)[
+      #grid(
+        columns: (1fr, auto),
+        row-gutter: 5pt,
+        ..for i in range(max-rows) {
+          (
+            if i < left-items.len() { left-items.at(i) } else { [] },
+            if i < right-items.len() { align(right)[#right-items.at(i)] } else { [] }
+          )
+        }
+      )
+    ]
     v(3pt)
   }
 }

@@ -20,3 +20,4 @@
 #let item-spacing = 4pt
 #let header-v-offset = -8pt
 #let page-margins = (x: 1cm, y: 1cm)
+#let padding = 9pt
