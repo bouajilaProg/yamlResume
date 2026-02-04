@@ -41,9 +41,20 @@ export class ResumeBuilder {
 
     // section header
     this.parts.push(blocks.sectionTitle("Experience"));
-    experiences!.forEach(exp => {
-      this.parts.push(blocks.ExperienceBlock(exp));
-    });
+    this.parts.push("#v(0.4em)");
+
+    if (experiences!.length === 1) {
+      this.parts.push("#" + blocks.ExperienceBlock(experiences![0]));
+    } else {
+
+      this.parts.push("#stack(spacing:1.5em,")
+      experiences!.forEach(exp => {
+        this.parts.push(blocks.ExperienceBlock(exp));
+        this.parts.push(",")
+      });
+      this.parts.push(")"); // end stack
+    }
+    this.parts.push("#v(1em)");
     return this;
   }
 

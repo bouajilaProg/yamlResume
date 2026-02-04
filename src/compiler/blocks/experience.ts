@@ -7,14 +7,14 @@ function ExperienceBlock(experience: WorkExperience): string {
 
   return `
 
-  #experience(
+  experience(
   title: "${experience.jobTitle}",
   titleRole: "${experience.company}",
   description: "${description}",
   location: "${experience.location}",
   date: "${date}",
   tags: (${tags.map(t => `"${t}"`).join(",  ")})
-)`;
+)`.trim();
 }
 
 export { ExperienceBlock };
