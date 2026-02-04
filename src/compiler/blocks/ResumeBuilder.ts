@@ -78,6 +78,8 @@ export class ResumeBuilder {
     return this;
   }
 
+
+
   addProjects(projects?: Project[]) {
     if (this.skipIfNull(projects)) return this;
 
@@ -105,7 +107,11 @@ export class ResumeBuilder {
     if (this.skipIfNull(skills)) return this;
 
     this.parts.push(blocks.sectionTitle("Skills"));
+
+    this.parts.push("#v(0.4em)");
     this.parts.push(blocks.SkillsBlock(skills!));
+    this.parts.push("#v(1em)");
+
     return this;
   }
 
