@@ -129,7 +129,9 @@ export class ResumeBuilder {
   addHobbies(hobbies?: Hobbies) {
     if (this.skipIfNull(hobbies) || hobbies!.length === 0) return this;
     this.parts.push(blocks.sectionTitle("Hobbies"));
+    this.parts.push("#v(0.4em)");
     this.parts.push(blocks.HobbiesBlock(hobbies!));
+    this.parts.push("#v(0.6em)");
     return this;
   }
 
