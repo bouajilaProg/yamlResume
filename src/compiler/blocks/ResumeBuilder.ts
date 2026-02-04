@@ -62,9 +62,19 @@ export class ResumeBuilder {
     if (this.skipIfNull(educations)) return this;
 
     this.parts.push(blocks.sectionTitle("Education"));
-    educations!.forEach(edu => {
-      this.parts.push(blocks.EducationBlock(edu));
-    });
+    this.parts.push("#v(0.4em)");
+
+    if (educations!.length === 1) {
+      this.parts.push("#" + blocks.EducationBlock(educations![0]));
+    } else {
+      this.parts.push("#stack(spacing:1.5em,")
+      educations!.forEach(edu => {
+        this.parts.push(blocks.EducationBlock(edu));
+        this.parts.push(",")
+      });
+      this.parts.push(")"); // end stack
+    }
+    this.parts.push("#v(1em)");
     return this;
   }
 
