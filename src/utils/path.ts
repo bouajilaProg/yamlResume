@@ -5,6 +5,7 @@ interface Paths {
   input: string;
   output: string;
   outputTypst: string;
+  outputDir: string;
   root: string;
 }
 
@@ -16,17 +17,17 @@ const __dirname = path.dirname(__filename);
 const root = path.resolve(__dirname, "../..");
 const input = path.resolve(root, "build/resume.yaml");
 
-const outputTypst = path.resolve(process.cwd(), "output/resume.typ");
-const output = path.resolve(process.cwd(), "output/resume.pdf");
+
+const outputDir = path.resolve(root, "output");
+const outputTypst = path.resolve(outputDir, "resume.typ");
+const output = path.resolve(outputDir, "resume.pdf");
 
 const paths: Paths = {
   input,
   output,
   outputTypst,
+  outputDir,
   root,
 };
 
 export { paths };
-
-
-

@@ -1,34 +1,41 @@
 {
-  "name": "resumeMaker",
+  "name": "resumeCompiler",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Generate PDF resumes from structured data using Typst",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
   "type": "module",
   "scripts": {
-    "dev": "tsx bin/resume-maker.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
-
-    "test:compile": "tsx ./src/compiler/test/compileTestBlock.test.ts",
-    "test:dev:compile": "nodemon --watch src --watch template --ext ts,typ --ignore node_modules --ignore dist --exec src/compiler/test/compile.e2e.sh"
+    "test": "tsx ./src/compiler/test/compileTestBlock.test.ts",
+    "test:watch": "nodemon --watch src --watch template --ext ts,typ --ignore node_modules --ignore dist --exec 'pnpm test'"
   },
-  "keywords": [],
+  "keywords": [
+    "resume",
+    "pdf",
+    "typst",
+    "cv",
+    "generator"
+  ],
   "author": "bouajila",
   "license": "ISC",
   "packageManager": "pnpm@10.25.0",
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "@types/prompts": "^2.4.9",
-    "chalk": "^5.6.2",
-    "commander": "^14.0.2",
-    "execa": "^9.6.1",
-    "nodemon": "^3.1.11",
-    "opencode-antigravity-auth": "1.2.9-beta.3",
-    "ora": "^9.0.0",
-    "prompts": "^2.4.2"
+    "execa": "^9.6.1"
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
+    "nodemon": "^3.1.11",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

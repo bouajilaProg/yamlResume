@@ -1,29 +1,14 @@
-import { writeFileSync } from "fs";
-import { ResumeBuilder } from "../blocks/ResumeBuilder";
-import { compileToPdf } from "../compile";
+import { compile } from "../../index";
 import mockResume from "./mockResume";
-import { paths } from "../../utils/path";
 
-function testBlocks() {
-  const builder = new ResumeBuilder();
+async function testBlocks() {
+  // Test buffer output (default)
+  const { buffer } = await compile(mockResume);
+  console.log(`Compiled PDF bytes: ${buffer?.length}`);
 
-  builder
-    .setBase()
-    .setHeader(mockResume?.personalInfo?.name, mockResume?.personalInfo?.contact)
-    .addProfile(mockResume?.personalInfo?.description)
-
-
-  for (const section of mockResume.sections) {
-    builder.addSection(section);
-  }
-
-  const resumeString = builder.build();
-  //write to file for debugging
-  writeFileSync(paths.outputTypst, resumeString);
-
-  compileToPdf(paths.outputTypst, paths.output);
+  // Test writing to file
+  await compile(mockResume, { outputPath: "./output/resume.pdf" });
+  console.log("PDF written to output/resume.pdf");
 }
 
 testBlocks();
-
-
