@@ -10,3 +10,4 @@ export * from "./extraCurr";
 export * from "./sectionTitle";
 export * from "./languages";
 export * from "./hobbies";
+export * from "./spacing";
