@@ -154,12 +154,22 @@ export class ResumeBuilder {
     return this;
   }
 
+
   addExtracurriculars(extracurriculars?: ExtraCurricularActivity[]) {
     if (this.skipIfNull(extracurriculars) || extracurriculars!.length === 0) return this;
-    this.parts.push(blocks.sectionTitle("Extracurriculars"));
+
+    this.parts.push('#section("Extracurriculars")');
+    this.parts.push('#v(0.4em)');
+
+    // Map activities into the tuple format
     const activityItems = extracurriculars!.map(act => blocks.ExtraCurrBlock(act));
-    const itemsStr = activityItems.length === 1 ? `${activityItems[0]}` : activityItems.join("\n");
-    this.parts.push(itemsStr);
+
+    // Join with commas and wrap in the one_liner function
+    const oneLiner = `#one_liner((\n  ${activityItems.join(',\n  ')}\n))`;
+
+    this.parts.push(oneLiner);
+    this.parts.push('#v(1em)');
+
     return this;
   }
 
