@@ -1,3 +1,4 @@
+import * as blocks from "../blocks/";
 import { Contact } from "../../../types/personalInfo.type";
 import { WorkExperience } from "../../../types/experience.type";
 import { EducationItem } from "../../../types/education.type";
@@ -7,15 +8,33 @@ import { Certification } from "../../../types/certif.type";
 import { ExtraCurricularActivity } from "../../../types/extraCurr.type";
 import { Hobbies } from "../../../types/hobbies.type";
 import { Languages } from "../../../types/languages.type";
-import * as blocks from "../blocks/";
-import { ResumeSection, SectionType } from "types/resumeItem.type";
+import { ResumeSection, SectionType, SectionTypeValue } from "types/resumeItem.type";
 
 export class ResumeBuilder {
   private parts: string[] = [];
 
-  // skip if any of the vals is null or undefined
   private skipIfNull(...vals: any[]) {
-    return vals.some(v => v == null);
+    return vals.some(v => v == null || (Array.isArray(v) && v.length === 0));
+  }
+
+  private addListSection<T>(
+    title: string,
+    data: T[] | undefined,
+    blockFn: (item: T) => string,
+    stackSpacing = "1.5em"
+  ) {
+    if (this.skipIfNull(data)) return this;
+
+    const isSingle = data!.length === 1;
+    this.parts.push(
+      blocks.sectionTitle(title),
+      blocks.spacing(0.4),
+      isSingle
+        ? `#${blockFn(data![0])}`
+        : `#stack(spacing: ${stackSpacing}, ${data!.map(blockFn).join(",\n")})`,
+      blocks.spacing(isSingle ? 0.6 : 1)
+    );
+    return this;
   }
 
   setBase() {
@@ -25,197 +44,80 @@ export class ResumeBuilder {
 
   setHeader(name?: string, contacts?: Contact[]) {
     if (this.skipIfNull(name, contacts)) return this;
-    this.parts.push(blocks.Header(name!, contacts!));
+    this.parts.push(blocks.Header(name!, contacts!), blocks.spacing(1));
     return this;
   }
 
   addProfile(userSummary?: string) {
     if (this.skipIfNull(userSummary)) return this;
-    this.parts.push(blocks.sectionTitle("Profile"));
-    this.parts.push(blocks.Profile(userSummary!));
+    this.parts.push(blocks.sectionTitle("Profile"), blocks.Profile(userSummary!));
     return this;
   }
 
-  addExperience(experiences?: WorkExperience[]) {
-    if (this.skipIfNull(experiences)) return this;
+  addExperience = (exp?: WorkExperience[]) =>
+    this.addListSection("Experience", exp, blocks.ExperienceBlock, "1em");
 
-    // section header
-    this.parts.push(blocks.sectionTitle("Experience"));
-    this.parts.push("#v(0.4em)");
+  addEducations = (edu?: EducationItem[]) =>
+    this.addListSection("Education", edu, blocks.EducationBlock);
 
-    if (experiences!.length === 1) {
-      this.parts.push("#" + blocks.ExperienceBlock(experiences![0]));
-    } else {
-
-      this.parts.push("#stack(spacing:1.5em,")
-      experiences!.forEach(exp => {
-        this.parts.push(blocks.ExperienceBlock(exp));
-        this.parts.push(",")
-      });
-      this.parts.push(")"); // end stack
-    }
-    this.parts.push("#v(1em)");
-    return this;
-  }
-
-  addEducations(educations?: EducationItem[]) {
-    if (this.skipIfNull(educations)) return this;
-
-    this.parts.push(blocks.sectionTitle("Education"));
-    this.parts.push("#v(0.4em)");
-
-    if (educations!.length === 1) {
-      this.parts.push("#" + blocks.EducationBlock(educations![0]));
-    } else {
-      this.parts.push("#stack(spacing:1.5em,")
-      educations!.forEach(edu => {
-        this.parts.push(blocks.EducationBlock(edu));
-        this.parts.push(",")
-      });
-      this.parts.push(")"); // end stack
-    }
-    this.parts.push("#v(1em)");
-    return this;
-  }
-
-
-
-  addProjects(projects?: Project[]) {
-    if (this.skipIfNull(projects)) return this;
-
-
-    // section header
-    this.parts.push(blocks.sectionTitle("Projects"));
-    this.parts.push("#v(0.4em)");
-
-    if (projects!.length === 1) {
-      this.parts.push("#" + blocks.ProjectBlock(projects![0]));
-    } else {
-      this.parts.push("#stack(spacing:1.5em,")
-      projects!.forEach(proj => {
-        this.parts.push(blocks.ProjectBlock(proj));
-        this.parts.push(",")
-      });
-      this.parts.push(")"); // end stack
-    }
-    this.parts.push("#v(1em)");
-    return this;
-
-  }
+  addProjects = (proj?: Project[]) =>
+    this.addListSection("Projects", proj, blocks.ProjectBlock);
 
   addSkills(skills?: Skills) {
     if (this.skipIfNull(skills)) return this;
-
-    this.parts.push(blocks.sectionTitle("Skills"));
-
-    this.parts.push("#v(0.4em)");
-    this.parts.push(blocks.SkillsBlock(skills!));
-    this.parts.push("#v(1em)");
-
+    this.parts.push(blocks.sectionTitle("Skills"), blocks.spacing(0.4), blocks.SkillsBlock(skills!), blocks.spacing(1));
     return this;
   }
 
   addLanguages(languages?: Languages) {
-    if (this.skipIfNull(languages) || languages!.length === 0) return this;
-    this.parts.push(blocks.sectionTitle("Spoken Languages"));
-
-    this.parts.push("#v(0.4em)");
-    this.parts.push(blocks.LanguagesBlock(languages!));
-
-    this.parts.push("#v(0.6em)");
+    if (this.skipIfNull(languages)) return this;
+    this.parts.push(blocks.sectionTitle("Spoken Languages"), blocks.spacing(0.4), blocks.LanguagesBlock(languages!), blocks.spacing(0.6));
     return this;
   }
 
   addHobbies(hobbies?: Hobbies) {
-    if (this.skipIfNull(hobbies) || hobbies!.length === 0) return this;
-    this.parts.push(blocks.sectionTitle("Hobbies"));
-    this.parts.push("#v(0.4em)");
-    this.parts.push(blocks.HobbiesBlock(hobbies!));
-    this.parts.push("#v(0.6em)");
+    if (this.skipIfNull(hobbies)) return this;
+    this.parts.push(blocks.sectionTitle("Hobbies"), blocks.spacing(0.4), blocks.HobbiesBlock(hobbies!), blocks.spacing(0.6));
     return this;
   }
 
-  addCertifications(certifications?: Certification[]) {
-    if (this.skipIfNull(certifications) || certifications!.length === 0) return this;
-
-    // Add the section header and vertical spacing
-    this.parts.push('#section("Certifications")');
-    this.parts.push('#v(0.4em)');
-
-    // Map each certification through our block builder
-    const certStrings = certifications!.map(cert => blocks.CertificationBlock(cert));
-
-    // Join them with commas and wrap in the #one_liner function
-    const oneLiner = `#one_liner((\n  ${certStrings.join(',\n  ')}\n))`;
-
-    this.parts.push(oneLiner);
-    this.parts.push('#v(1em)');
-
-    return this;
+  addCertifications(certs?: Certification[]) {
+    return this.addOneLinerSection("Certifications", certs, blocks.CertificationBlock);
   }
 
+  addExtracurriculars(extras?: ExtraCurricularActivity[]) {
+    return this.addOneLinerSection("Extracurriculars", extras, blocks.ExtraCurrBlock);
+  }
 
-  addExtracurriculars(extracurriculars?: ExtraCurricularActivity[]) {
-    if (this.skipIfNull(extracurriculars) || extracurriculars!.length === 0) return this;
-
-    this.parts.push('#section("Extracurriculars")');
-    this.parts.push('#v(0.4em)');
-
-    // Map activities into the tuple format
-    const activityItems = extracurriculars!.map(act => blocks.ExtraCurrBlock(act));
-
-    // Join with commas and wrap in the one_liner function
-    const oneLiner = `#one_liner((\n  ${activityItems.join(',\n  ')}\n))`;
-
-    this.parts.push(oneLiner);
-    this.parts.push('#v(1em)');
-
+  private addOneLinerSection<T>(title: string, data: T[] | undefined, blockFn: (item: T) => string) {
+    if (this.skipIfNull(data)) return this;
+    const isSingle = data!.length === 1;
+    this.parts.push(
+      blocks.sectionTitle(title),
+      blocks.spacing(0.4),
+      `#one_liner((\n  ${data!.map(blockFn).join(",\n  ")}\n))`,
+      blocks.spacing(isSingle ? 0.6 : 1)
+    );
     return this;
   }
 
   addSection(section: ResumeSection) {
-    switch (section.type) {
-      case SectionType.WorkExperience:
-        this.addExperience(section.body);
-        break;
+    const handlers: Record<SectionTypeValue, (body: any) => void> = {
+      [SectionType.WorkExperience]: this.addExperience,
+      [SectionType.Education]: this.addEducations,
+      [SectionType.Project]: this.addProjects,
+      [SectionType.Skills]: this.addSkills.bind(this),
+      [SectionType.Certification]: this.addCertifications.bind(this),
+      [SectionType.ExtraCurricular]: this.addExtracurriculars.bind(this),
+      [SectionType.Hobbies]: this.addHobbies.bind(this),
+      [SectionType.Languages]: this.addLanguages.bind(this),
+    };
 
-      case SectionType.Education:
-        this.addEducations(section.body);
-        break;
-
-      case SectionType.Project:
-        this.addProjects(section.body);
-        break;
-
-      case SectionType.Skills:
-        this.addSkills(section.body);
-        break;
-
-      case SectionType.Certification:
-        this.addCertifications(section.body);
-        break;
-
-      case SectionType.ExtraCurricular:
-        this.addExtracurriculars(section.body);
-        break;
-
-      case SectionType.Hobbies:
-        this.addHobbies(section.body);
-        break;
-
-      case SectionType.Languages:
-        this.addLanguages(section.body);
-        break;
-
-      default:
-        const _exhaustiveCheck: never = section;
-        console.error("Unknown section detected", _exhaustiveCheck);
-        break;
-    }
+    handlers[section.type]?.(section.body);
     return this;
   }
+
   build(): string {
-    return this.parts.join("\n\n");
+    return this.parts.join("\n");
   }
 }
-
