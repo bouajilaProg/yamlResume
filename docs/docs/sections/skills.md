@@ -1,6 +1,14 @@
+---
+sidebar_position: 3
+---
+
 # Skills
 
 The `Skills` section allows you to categorize your technical and soft skills.
+
+## Why it's important
+
+This section provides a quick way for recruiters and Applicant Tracking Systems (ATS) to identify if you have the specific technical requirements for a job. Grouping them by category makes it easier to read and highlights your versatility.
 
 ## Schema
 

@@ -1,6 +1,14 @@
+---
+sidebar_position: 4
+---
+
 # Education
 
 The `Education` section highlights your academic background.
+
+## Why it's important
+
+Education provides the foundation of your knowledge. For early-career professionals, it's often a primary indicator of potential. For seasoned professionals, it verifies that they have the necessary academic credentials required for certain positions.
 
 ## Schema
 

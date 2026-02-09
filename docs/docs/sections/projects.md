@@ -1,6 +1,14 @@
+---
+sidebar_position: 5
+---
+
 # Projects
 
 The `Projects` section showcases personal or professional projects you've worked on.
+
+## Why it's important
+
+Projects allow you to demonstrate your skills in a practical way, especially if they are personal or open-source. They show initiative, passion, and the ability to build something from scratch. For developers, a strong projects section can be as influential as work experience.
 
 ## Schema
 

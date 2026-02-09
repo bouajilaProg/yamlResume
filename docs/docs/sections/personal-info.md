@@ -1,6 +1,14 @@
+---
+sidebar_position: 1
+---
+
 # Personal Info
 
 The `personalInfo` object contains your basic information, header details, and a professional summary.
+
+## Why it's important
+
+This is the most critical part of your resume. It tells the recruiter who you are, where you are located, and how to reach you. The professional summary (description) serves as your "elevator pitch," highlighting your core value proposition at a glance.
 
 ## Schema
 

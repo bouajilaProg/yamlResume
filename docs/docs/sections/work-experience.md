@@ -1,6 +1,14 @@
+---
+sidebar_position: 2
+---
+
 # Work Experience
 
 The `WorkExperience` section describes your professional history.
+
+## Why it's important
+
+For most professionals, this is the core of the resume. It provides evidence of your skills and accomplishments in a professional setting. It allows recruiters to see your career progression and the impact you've made in previous roles.
 
 ## Schema
 
