@@ -10,9 +10,31 @@ Get your professional resume ready in minutes.
 
 First, install the generator and ensure you have [Typst](https://typst.app/docs/install/) installed on your system.
 
-```bash
-pnpm add bouajila-resume-generator
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="npm" label="npm">
+    ```bash
+    npm install bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="pnpm" label="pnpm">
+    ```bash
+    pnpm add bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```bash
+    yarn add bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="bun" label="bun">
+    ```bash
+    bun add bouajila-resume-generator
+    ```
+  </TabItem>
+</Tabs>
 
 ## 2. Define your Resume
 
@@ -22,15 +44,17 @@ Create a JSON or TypeScript object following the `Resume` structure.
 import { Resume, SectionType } from "bouajila-resume-generator";
 
 const myResume: Resume = {
-  name: "Jane Doe",
-  description: "Software Engineer",
+  name: "Jane Doe Resume",
+  description: "Master Resume",
   template: "standard",
   lastUpdate: "2025-02-09",
   personalInfo: {
     name: "Jane Doe",
     location: "New York, NY",
+    description: "Experienced Software Engineer with a passion for clean code.",
     contact: [
-      { id: 1, type: "Email", value: "jane.doe@example.com" }
+      { id: 1, type: "Email", value: "jane.doe@example.com" },
+      { id: 2, type: "LinkedIn", value: "linkedin.com/in/janedoe" }
     ]
   },
   sections: [

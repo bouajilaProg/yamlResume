@@ -12,11 +12,13 @@ This section provides a quick way for recruiters and Applicant Tracking Systems 
 
 ## Schema
 
+The `Skills` object is divided into three fixed categories. All fields are required (though they can be empty arrays).
+
 ```typescript
 interface Skills {
-  languages: SkillItem[];
-  technologies: SkillItem[];
-  softSkills: SkillItem[];
+  languages: SkillItem[];    // Programming or spoken languages (if grouped here)
+  technologies: SkillItem[]; // Frameworks, libraries, tools
+  softSkills: SkillItem[];   // Interpersonal skills
 }
 
 interface SkillItem {
@@ -25,6 +27,10 @@ interface SkillItem {
   type: "LANG" | "TECH" | "SOFT";
 }
 ```
+
+## Layout
+
+In the generated PDF, skills are presented as a "One-Liner" where each category is bolded followed by its respective items separated by commas. This compact design saves space while maintaining high readability.
 
 ## Example
 

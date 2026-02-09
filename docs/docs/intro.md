@@ -18,8 +18,30 @@ Welcome to the **bouajila-resume-generator** documentation!
 
 ## Getting Started
 
-To get started, install the package:
+To get started, install the package using your preferred package manager:
 
-```bash
-pnpm add bouajila-resume-generator
-```
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="npm" label="npm">
+    ```bash
+    npm install bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="pnpm" label="pnpm">
+    ```bash
+    pnpm add bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="yarn" label="yarn">
+    ```bash
+    yarn add bouajila-resume-generator
+    ```
+  </TabItem>
+  <TabItem value="bun" label="bun">
+    ```bash
+    bun add bouajila-resume-generator
+    ```
+  </TabItem>
+</Tabs>

@@ -27,6 +27,10 @@ interface Contact {
 }
 ```
 
+:::tip Icons
+Each contact type automatically maps to a corresponding icon in the PDF header. Supported types include `Email`, `Phone`, `Website`, `GitHub`, and `LinkedIn`.
+:::
+
 ## Example
 
 ```json

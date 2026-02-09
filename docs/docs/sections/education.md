@@ -18,7 +18,6 @@ interface EducationItem {
   degreeType: "BS" | "MS" | "PhD";
   degreeName: string;
   institution: string;
-  location?: string;
   startDate: string;
   endDate: string;
   description: string;

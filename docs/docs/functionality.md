@@ -34,11 +34,46 @@ await compile(myResume, {
 });
 ```
 
-### Example with Buffer Return
+### Example: Saving to a specific directory
+
+```typescript
+import path from "node:path";
+import { compile } from "bouajila-resume-generator";
+
+const output = path.join(process.cwd(), "build", "resumes", "john-doe.pdf");
+
+await compile(myResume, { 
+  outputPath: output 
+});
+```
+
+### Example: Returning a Blob for Frontend
+
+If you are using this in a web environment (e.g., a Next.js API route or a client-side trigger), you can request a `Blob`.
+
+```typescript
+const { blob } = await compile(myResume, { format: "blob" });
+
+// You can then create a download link
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = "resume.pdf";
+a.click();
+```
+
+### Example: Custom Buffer handling
 
 ```typescript
 const { buffer } = await compile(myResume);
-// buffer is a Node.js Buffer containing the PDF data
+
+// Example: Sending via an email attachment or uploading to S3
+await s3.upload({
+  Bucket: "my-resumes",
+  Key: "resume.pdf",
+  Body: buffer,
+  ContentType: "application/pdf"
+}).promise();
 ```
 
 ## Generating Typst Source
