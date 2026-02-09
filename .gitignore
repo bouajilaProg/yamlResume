@@ -7,6 +7,9 @@ output/
 # node_modules directory
 node_modules/
 
+# Temp compilation files
+.tmp-compile-*
+
 
 # todo
 todo.md
