@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { compile, generateTypstSource } from "./index";
 import mockResume from "./compiler/test/mockResume";
 
-describe("yamlResume integration", () => {
+describe("bouajila-resume-generator integration", () => {
   it("should generate Typst source string", () => {
     const source = generateTypstSource(mockResume);
     expect(source).toContain("#header");

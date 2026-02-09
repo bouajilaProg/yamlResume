@@ -1,6 +1,6 @@
 # Codebase Cleanup and Testing Plan
 
-This plan outlines the steps to refactor the `yamlResume` project for better maintainability, type safety, and robust testing.
+This plan outlines the steps to refactor the `bouajila-resume-generator` project for better maintainability, type safety, and robust testing.
 
 ## Phase 1: Infrastructure & Path Cleanup
 - **Install Vitest:** Replace manual testing scripts with a proper testing framework.
