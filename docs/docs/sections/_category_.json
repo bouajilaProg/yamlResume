@@ -1,0 +1,8 @@
+{
+  "label": "Resume Sections",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Details about each supported resume section."
+  }
+}
