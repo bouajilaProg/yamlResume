@@ -1,7 +1,8 @@
 import { Skills } from "../../../types/skills.type";
+import { typstEscape } from "../../utils/escape";
 
 function SkillsBlock(skills: Skills): string {
-  const formatSkill = (item: { name: string }) => item.name;
+  const formatSkill = (item: { name: string }) => typstEscape(item.name);
   const languages = skills.languages.map(formatSkill).join(", ");
   const technologies = skills.technologies.map(formatSkill).join(", ");
   const softSkills = skills.softSkills.map(formatSkill).join(", ");

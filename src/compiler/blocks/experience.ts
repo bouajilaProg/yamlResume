@@ -1,17 +1,17 @@
 import { WorkExperience } from "../../../types/experience.type";
+import { typstEscape } from "../../utils/escape";
 
 function ExperienceBlock(experience: WorkExperience): string {
-  const date = `${experience.startDate} - ${experience.endDate}`;
-  const tags = experience.keywords.split(",").map(k => k.trim());
-  const description = experience.summary;
+  const date = `${typstEscape(experience.startDate)} - ${typstEscape(experience.endDate)}`;
+  const tags = experience.keywords.split(",").map(k => typstEscape(k.trim()));
+  const description = typstEscape(experience.summary);
 
   return `
-
   experience(
-  title: "${experience.jobTitle}",
-  titleRole: "${experience.company}",
+  title: "${typstEscape(experience.jobTitle)}",
+  titleRole: "${typstEscape(experience.company)}",
   description: "${description}",
-  location: "${experience.location}",
+  location: "${typstEscape(experience.location)}",
   date: "${date}",
   tags: (${tags.map(t => `"${t}"`).join(",  ")})
 )`.trim();

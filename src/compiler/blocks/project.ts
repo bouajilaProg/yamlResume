@@ -1,17 +1,17 @@
 import { Project } from "../../../types/project.type";
+import { typstEscape } from "../../utils/escape";
 
 function ProjectBlock(project: Project): string {
   // Map tags to quoted strings for Typst array syntax
-  const tags = project.tools.split(",").map(t => `"${t.trim()}"`).join(", ");
+  const tags = project.tools.split(",").map(t => `"${typstEscape(t.trim())}"`).join(", ");
 
   // Format description: Map notes to quoted strings for Typst array syntax
-  // This allows the Typst function to see multiple items and render a list
-  const descriptionItems = project.notes.map(note => `"${note.replace(/"/g, '\\"')}"`).join(", ");
+  const descriptionItems = project.notes.map(note => `"${typstEscape(note)}"`).join(", ");
 
-  const linkUrl = project.projectLink ? `"${project.projectLink}"` : "none";
+  const linkUrl = project.projectLink ? `"${typstEscape(project.projectLink)}"` : "none";
 
   return `experience(
-  title: "${project.title}",
+  title: "${typstEscape(project.title)}",
   titleRole: "",
   description: (${descriptionItems}),
   location: "",
