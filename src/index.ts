@@ -38,8 +38,13 @@ export async function compile(
   // confirm Typst is available
   await verifyEnv();
 
-  // create temp directory for compilation
-  const tempBaseDir = path.join(os.tmpdir(), "yaml-resume-");
+  // create temp directory for compilation inside project root
+  // Typst requires source files to be within the --root directory
+  const tempBaseDir = path.join(process.cwd(), ".tmp-compile-");
+  try {
+    await fs.mkdir(path.dirname(tempBaseDir), { recursive: true });
+  } catch {}
+  
   const tempDir = await fs.mkdtemp(tempBaseDir);
   const tempTypst = path.join(tempDir, "resume.typ");
   const tempPdf = path.join(tempDir, "resume.pdf");
