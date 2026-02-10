@@ -16,7 +16,7 @@ The `compile` function is an asynchronous function that takes your resume data a
 
 #### Parameters
 
-- **`resume`**: The structured resume data (see [Sections](/docs/category/resume-sections) for details).
+- **`resume`**: The structured resume data (see [Sections](/category/resume-sections) for details).
 - **`options`** (optional): An object to configure the output.
   - **`outputPath`**: (string) The file path where the PDF should be saved. If provided, the generator will write the file automatically.
   - **`format`**: (`"buffer"` | `"blob"`) Specifies the return type.
