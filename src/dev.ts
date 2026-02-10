@@ -1,5 +1,5 @@
 import { unsafeCompile } from "./index";
-import mockResume from "./compiler/test/mockResume";
+import mockResume from "./mocks/mockResume";
 import path from "node:path";
 import fs from "node:fs/promises";
 

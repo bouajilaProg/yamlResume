@@ -1,5 +1,5 @@
-import { Resume } from "../../../types/resumeItem.type";
-import { SectionType } from "../../../types/resumeItem.type"; // Ensure SectionType is exported and imported
+import { Resume } from "../../types/resumeItem.type";
+import { SectionType } from "../../types/resumeItem.type"; // Ensure SectionType is exported and imported
 
 const mockResume: Resume = {
   name: "Jane Developer",

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { compile, generateTypstSource } from "./index";
-import mockResume from "./compiler/test/mockResume";
+import mockResume from "./mocks/mockResume";
 
 describe("bouajila-resume-generator integration", () => {
   it("should generate Typst source string", () => {
