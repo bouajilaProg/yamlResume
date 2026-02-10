@@ -129,27 +129,23 @@ export class ResumeBuilder {
     return this.addOneLinerSection("Extracurriculars", extras, blocks.ExtraCurrBlock);
   }
 
+  private sectionHandlers: Record<string, (body: any) => ResumeBuilder> = {
+    [SectionType.WorkExperience]: (body) => this.addExperience(body),
+    [SectionType.Education]: (body) => this.addEducations(body),
+    [SectionType.Project]: (body) => this.addProjects(body),
+    [SectionType.Skills]: (body) => this.addSkills(body),
+    [SectionType.Certification]: (body) => this.addCertifications(body),
+    [SectionType.ExtraCurricular]: (body) => this.addExtracurriculars(body),
+    [SectionType.Hobbies]: (body) => this.addHobbies(body),
+    [SectionType.Languages]: (body) => this.addLanguages(body),
+  };
+
   addSection(section: ResumeSection) {
-    switch (section.type) {
-      case SectionType.WorkExperience:
-        return this.addExperience(section.body);
-      case SectionType.Education:
-        return this.addEducations(section.body);
-      case SectionType.Project:
-        return this.addProjects(section.body);
-      case SectionType.Skills:
-        return this.addSkills(section.body);
-      case SectionType.Certification:
-        return this.addCertifications(section.body);
-      case SectionType.ExtraCurricular:
-        return this.addExtracurriculars(section.body);
-      case SectionType.Hobbies:
-        return this.addHobbies(section.body);
-      case SectionType.Languages:
-        return this.addLanguages(section.body);
-      default:
-        return this;
+    const handler = this.sectionHandlers[section.type];
+    if (handler) {
+      return handler(section.body);
     }
+    return this;
   }
 
   build(): string {
