@@ -1,4 +1,4 @@
-import { compile } from "./index";
+import { unsafeCompile } from "./index";
 import mockResume from "./compiler/test/mockResume";
 import path from "node:path";
 import fs from "node:fs/promises";
@@ -8,7 +8,7 @@ async function dev() {
   const outputPath = path.join(process.cwd(), "output", "resume.pdf");
   
   try {
-    await compile(mockResume, { outputPath });
+    await unsafeCompile(mockResume, { outputPath });
     console.log(`✅ Resume successfully compiled to: ${outputPath}`);
   } catch (error) {
     console.error("❌ Compilation failed:", error);

@@ -79,10 +79,28 @@ const myResume: Resume = {
 
 ## 3. Generate PDF
 
-Use the `compile` function to produce your PDF.
+Use the `compile` function to produce your PDF. It returns a `Result` object to safely handle errors without throwing.
 
 ```typescript
 import { compile } from "bouajila-resume-generator";
 
-await compile(myResume, { outputPath: "./resume.pdf" });
+const result = await compile(myResume, { outputPath: "./resume.pdf" });
+
+if (result.success) {
+  console.log("PDF generated successfully!");
+} else {
+  console.error("Failed to generate PDF:", result.error.message);
+}
+```
+
+Alternatively, if you prefer using `try/catch`, you can use `unsafeCompile`:
+
+```typescript
+import { unsafeCompile } from "bouajila-resume-generator";
+
+try {
+  await unsafeCompile(myResume, { outputPath: "./resume.pdf" });
+} catch (error) {
+  console.error(error);
+}
 ```

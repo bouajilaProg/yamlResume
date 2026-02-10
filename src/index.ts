@@ -2,11 +2,11 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import { ResumeBuilder } from "./compiler/blocks/ResumeBuilder";
-import { compileToPdf, verifyEnv } from "./compiler/compile";
+import { unsafeCompileToPdf, unsafeVerifyEnv } from "./compiler/compile";
 
 // Export all types and values (like SectionType) from the types directory
 export * from "../types/index";
-import type { Resume } from "../types/index";
+import type { Resume, Result } from "../types/index";
 
 export interface CompileOptions {
   /** Output format - "buffer" returns Node Buffer, "blob" returns Blob */
@@ -23,20 +23,20 @@ export interface CompileResult {
 }
 
 /**
- * Compiles a Resume object into a PDF.
+ * Compiles a Resume object into a PDF. Throws an error if compilation fails.
  * 
  * @param resume - The resume data to compile
  * @param options - Optional configuration for output format
  * @returns CompileResult containing the PDF as buffer or blob
  */
-export async function compile(
+export async function unsafeCompile(
   resume: Resume,
   options: CompileOptions = {}
 ): Promise<CompileResult> {
   const { format = "buffer", outputPath } = options;
 
   // confirm Typst is available
-  await verifyEnv();
+  await unsafeVerifyEnv();
 
   // create temp directory for compilation inside project root
   // Typst requires source files to be within the --root directory
@@ -64,7 +64,7 @@ export async function compile(
   // compile to PDF and read the result
   try {
     await fs.writeFile(tempTypst, resumeString);
-    await compileToPdf(tempTypst, tempPdf);
+    await unsafeCompileToPdf(tempTypst, tempPdf);
 
     const pdfBuffer = await fs.readFile(tempPdf);
 
@@ -82,6 +82,30 @@ export async function compile(
     return { buffer: pdfBuffer };
   } finally {
     await fs.rm(tempDir, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Safely compiles a Resume object into a PDF.
+ * Returns a Result object instead of throwing errors.
+ * 
+ * @param resume - The resume data to compile
+ * @param options - Optional configuration for output format
+ * @returns Result object containing either the CompileResult or an Error
+ */
+export async function compile(
+  resume: Resume,
+  options: CompileOptions = {}
+): Promise<Result<CompileResult>> {
+  try {
+    const data = await unsafeCompile(resume, options);
+    return { success: true, data, error: null };
+  } catch (err) {
+    return { 
+      success: false, 
+      data: null, 
+      error: err instanceof Error ? err : new Error(String(err)) 
+    };
   }
 }
 

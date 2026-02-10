@@ -12,7 +12,7 @@ The most common use case is generating a PDF directly. This is handled by the `c
 
 ### `compile(resume: Resume, options?: CompileOptions)`
 
-The `compile` function is an asynchronous function that takes your resume data and returns the compiled PDF.
+The `compile` function is an asynchronous function that takes your resume data and returns a `Result` object. This is the recommended way to use the generator as it doesn't throw errors, making it safer for production environments.
 
 #### Parameters
 
@@ -23,15 +23,30 @@ The `compile` function is an asynchronous function that takes your resume data a
     - `"buffer"` (default): Returns a Node.js `Buffer`.
     - `"blob"`: Returns a `Blob` (useful for browser-based triggers).
 
+#### Returns
+
+A `Result` object:
+- `success`: `boolean`
+- `data`: `CompileResult` (if success is true)
+- `error`: `Error` (if success is false)
+
+### `unsafeCompile(resume: Resume, options?: CompileOptions)`
+
+Similar to `compile`, but it throws an error instead of returning a `Result` object. Use this if you prefer using `try/catch` blocks.
+
 ### Example with Output Path
 
 ```typescript
 import { compile } from "bouajila-resume-generator";
 
 // This will create 'my-resume.pdf' in the current directory
-await compile(myResume, { 
+const result = await compile(myResume, { 
   outputPath: "./my-resume.pdf" 
 });
+
+if (!result.success) {
+  console.error(result.error);
+}
 ```
 
 ### Example: Saving to a specific directory
@@ -52,28 +67,34 @@ await compile(myResume, {
 If you are using this in a web environment (e.g., a Next.js API route or a client-side trigger), you can request a `Blob`.
 
 ```typescript
-const { blob } = await compile(myResume, { format: "blob" });
+const result = await compile(myResume, { format: "blob" });
 
-// You can then create a download link
-const url = URL.createObjectURL(blob);
-const a = document.createElement("a");
-a.href = url;
-a.download = "resume.pdf";
-a.click();
+if (result.success) {
+  const { blob } = result.data;
+  // You can then create a download link
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "resume.pdf";
+  a.click();
+}
 ```
 
 ### Example: Custom Buffer handling
 
 ```typescript
-const { buffer } = await compile(myResume);
+const result = await compile(myResume);
 
-// Example: Sending via an email attachment or uploading to S3
-await s3.upload({
-  Bucket: "my-resumes",
-  Key: "resume.pdf",
-  Body: buffer,
-  ContentType: "application/pdf"
-}).promise();
+if (result.success) {
+  const { buffer } = result.data;
+  // Example: Sending via an email attachment or uploading to S3
+  await s3.upload({
+    Bucket: "my-resumes",
+    Key: "resume.pdf",
+    Body: buffer,
+    ContentType: "application/pdf"
+  }).promise();
+}
 ```
 
 ## Generating Typst Source

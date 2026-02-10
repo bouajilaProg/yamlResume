@@ -11,17 +11,18 @@ describe("bouajila-resume-generator integration", () => {
   });
 
   it("should compile to PDF buffer (if typst is available)", async () => {
-    try {
-      const { buffer } = await compile(mockResume);
-      expect(buffer).toBeDefined();
-      expect(buffer instanceof Buffer).toBe(true);
-      expect(buffer!.length).toBeGreaterThan(0);
-    } catch (err) {
-      if ((err as Error).message.includes("Typst not found")) {
+    const result = await compile(mockResume);
+    
+    if (!result.success) {
+      if (result.error.message.includes("Typst not found")) {
         console.warn("Skipping PDF compilation test: Typst not found");
         return;
       }
-      throw err;
+      throw result.error;
     }
+
+    expect(result.data.buffer).toBeDefined();
+    expect(result.data.buffer instanceof Buffer).toBe(true);
+    expect(result.data.buffer!.length).toBeGreaterThan(0);
   }, 30000); // Higher timeout for compilation
 });
