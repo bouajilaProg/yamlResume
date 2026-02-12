@@ -2,7 +2,7 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import os from "node:os";
 import { ResumeBuilder } from "./compiler/blocks/ResumeBuilder";
-import { unsafeCompileToPdf, unsafeVerifyEnv } from "./compiler/compile";
+import { unsafeCompileToPdf, unsafeVerifyEnv, projectRoot } from "./compiler/compile";
 
 // Export all types and values (like SectionType) from the types directory
 export * from "../types/index";
@@ -40,7 +40,7 @@ export async function unsafeCompile(
 
   // create temp directory for compilation inside project root
   // Typst requires source files to be within the --root directory
-  const tempBaseDir = path.join(process.cwd(), ".tmp-compile-");
+  const tempBaseDir = path.join(projectRoot, ".tmp-compile-");
   try {
     await fs.mkdir(path.dirname(tempBaseDir), { recursive: true });
   } catch {}

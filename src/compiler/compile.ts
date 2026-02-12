@@ -1,11 +1,28 @@
 import { execa } from "execa";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
 import { Result } from "../../types/result.type";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const projectRoot = path.resolve(__dirname, "../../");
+
+/**
+ * Finds the project root by looking for the 'template' directory.
+ * This ensures we find the correct root whether running from src/ or dist/.
+ */
+function findProjectRoot(startDir: string): string {
+  let current = startDir;
+  while (current !== path.parse(current).root) {
+    if (existsSync(path.join(current, "template"))) {
+      return current;
+    }
+    current = path.dirname(current);
+  }
+  return path.resolve(__dirname, "../../");
+}
+
+export const projectRoot = findProjectRoot(__dirname);
 
 /**
  * Checks if Typst CLI is available. Throws if not found.
